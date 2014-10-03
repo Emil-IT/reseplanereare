@@ -1,25 +1,25 @@
 #include <stdlib.h>
 
 
-typedef struct link{
+struct link {
   void *data;
   struct link *next;
-}*Link;
+};
 
-typedef struct list{
-  Link first;
-  Link last;
-}*List;
+struct list {
+  struct link *first;
+  struct link *last;
+};
 
-List createList(){
-  List newList = malloc(sizeof(struct list));
+struct list *createList(){
+  struct list * newList = malloc(sizeof(struct list));
   newList -> first = NULL;
   newList -> last = NULL;
   return newList;
 }
 
-void append(List l, void* data){
-  Link newLink = malloc(sizeof(struct link));
+void append(struct list *l, void* data){
+  struct link * newLink = malloc(sizeof(struct link));
   newLink -> data = data;
   newLink -> next = NULL;
   if (l -> last == NULL){
@@ -32,8 +32,8 @@ void append(List l, void* data){
   }
 }
 
-void prepend(List l, void *data){
-  Link newLink = malloc(sizeof(struct link));
+void prepend(struct list * l, void *data){
+  struct link * newLink = malloc(sizeof(struct link));
   newLink -> data = data;
   newLink -> next = l -> first;
   l -> first = newLink;
@@ -42,14 +42,24 @@ void prepend(List l, void *data){
   }
 }
 
-void *read(List l, int index){
+int find(struct list *list, void *data){
+  struct link *tmpLink = list -> first;
+  int index = 0;
+  while (tmpLink -> next != NULL){
+    if (tmpLink -> data == data) return index;
+    index++;
+  }
+  return -1;
+}
+
+void *read(struct list * l, int index){
   if (index < 0){
     return NULL;
   }
   if (l -> first == NULL){
     return NULL;
   }
-  Link node = l -> first;
+  struct link * node = l -> first;
   for (int i = 0; i < index; ++i){
     if (node -> next == NULL){
       return NULL;
@@ -59,7 +69,7 @@ void *read(List l, int index){
   return node -> data;
 }
 
-void rmLink(List l, int index){
+void rmLink(struct list * l, int index){
   if (l -> first == l -> last  && index == 0){
     if (l -> first != NULL){
       free(l -> first);
@@ -68,7 +78,7 @@ void rmLink(List l, int index){
     }
     return;
   }
-  Link node = l -> first;
+  struct link * node = l -> first;
   for (int i = 0; i < index - 1; ++i){
     if (node -> next == NULL){
       return;

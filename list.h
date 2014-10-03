@@ -1,25 +1,24 @@
-typedef struct link{
-  void *data;
-  struct link *next;
-}*Link;
+#ifndef LIST_H
+#define LIST_H
 
-typedef struct list{
-  Link first;
-  Link last;
-}*List;
+struct link;
 
-List createList()
+struct list;
 
-void append(List l, void* data)
+struct list *createList();
 
-void prepend(List l, void *data)
+void append(struct list *l, void *data);
 
-void *read(List l, int index)
+void prepend(struct list *l, void *data);
 
-void rmLink(List l, int index)
+int find(struct list *list, void *data);
 
+void *read(struct list *l, int index);
+
+void rmLink(struct list *l, int index);
 
 
+#endif
 
 
 
