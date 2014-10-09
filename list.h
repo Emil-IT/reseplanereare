@@ -1,8 +1,6 @@
 #ifndef LIST_H
 #define LIST_H
 
-struct link;
-
 struct list;
 
 struct list *createList();

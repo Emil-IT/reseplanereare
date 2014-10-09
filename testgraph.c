@@ -6,6 +6,20 @@ struct tuple {
   struct node *adjNode;
 };
 
+int distance(struct node *from, struct node *to){
+  int index = findAdjacent(from, to);
+  if (index == -1){
+    int n = 0;
+    while (readAdjacent(from -> adjacent, n) != NULL){
+      struct node *adj = readAdjacent(from -> adjacent, n++);
+      return (adj -> dist) + distance(adj -> adjNode, to);
+    }
+  }
+  struct node *adj = readAdjacent(from -> adjacent, index);
+  return adj -> dist;
+  
+}
+
 int main()
 {
   struct node *alfa = createNode("Alfa");
@@ -20,6 +34,7 @@ int main()
   addAdjacent(beta, &BG);
   addAdjacent(alfa, &AD);
   addAdjacent(gamma, &GD);
+  
   
   return 0;
 }

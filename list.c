@@ -85,7 +85,9 @@ void rmLink(struct list * l, int index){
     }
     node = node -> next;
   }
+  struct link *tempNode = node -> next;
   node -> next = node -> next -> next;
+  free(tempNode);
   if (node -> next == NULL){
     l -> last = node;
   }

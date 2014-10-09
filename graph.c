@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "list.h"
 
+
 typedef struct node {
   char *name;
   struct list *adjacent;
@@ -23,6 +24,20 @@ void rmAdjacent(Node node, void *adj){
 }
 
 void rmNode(Node n){
+  //TODO:Remove from adjacent list
   free(n);
 }
 
+char *getName(Node node){
+  return node -> name;
+}
+
+int findAdjacent(Node nodeA, Node nodeB){
+  int index = find(nodeA -> adjacent, nodeB);
+  return index;
+}
+  
+Node readAdjacent(Node node, int index){
+  Node returnNode = read(node -> adjacent, index);
+  return returnNode;
+}
