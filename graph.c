@@ -2,6 +2,11 @@
 #include "list.h"
 //Lägga in tuples här?
 
+typedef struct tuple {
+  unsigned int dist;
+  struct node *adjNode;
+} *AdjTuple;
+
 typedef struct node {
   char *name;
   List adjacent;
@@ -14,7 +19,7 @@ Node createNode(char* name){
   return newnode;
 }
 
-void addAdjacent(Node node, void *adj){
+void addAdjacent(Node node, AdjTuple 
   append(node -> adjacent, adj);
 }
 
