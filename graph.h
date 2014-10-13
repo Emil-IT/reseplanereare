@@ -1,7 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-typedef struct node *Node;
+typedef struct node* Node;
 
 Node createNode(char* name);
 

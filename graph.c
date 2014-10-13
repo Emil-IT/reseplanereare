@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include "list.h"
-
+//Lägga in tuples här?
 
 typedef struct node {
   char *name;
-  struct list *adjacent;
+  List adjacent;
 }*Node;
 
 Node createNode(char* name){
@@ -24,7 +24,11 @@ void rmAdjacent(Node node, void *adj){
 }
 
 void rmNode(Node n){
-  //TODO:Remove from adjacent list
+  int index = 0;
+  while (read(n -> adjacent, index)){
+      rmAdjacent(read(n -> adjacent, index), n);
+      index++;
+  }
   free(n);
 }
 
